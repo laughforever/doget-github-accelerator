@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoGet GitHub 下载加速</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        width: 320px;
+        margin: 0;
+        padding: 14px 16px 16px;
+        font: 13px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+          "Microsoft YaHei", sans-serif;
+        background: #16181d;
+        color: #e8eaed;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      .logo {
+        width: 26px;
+        height: 26px;
+        border-radius: 7px;
+        background: #f59e0b;
+        color: #1b1d22;
+        font-weight: 800;
+        font-size: 14px;
+        display: grid;
+        place-items: center;
+      }
+      h1 {
+        font-size: 14px;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .sub {
+        color: #9aa0a6;
+        font-size: 11.5px;
+        margin: 0 0 12px;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 9px 10px;
+        background: #1e2128;
+        border: 1px solid #2a2e37;
+        border-radius: 9px;
+        margin-bottom: 8px;
+      }
+      .row .label {
+        font-size: 12.5px;
+      }
+      .row .hint {
+        display: block;
+        color: #868d96;
+        font-size: 11px;
+        margin-top: 2px;
+      }
+      .switch {
+        position: relative;
+        width: 38px;
+        height: 21px;
+        flex: 0 0 auto;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        position: absolute;
+      }
+      .switch span {
+        position: absolute;
+        inset: 0;
+        background: #3a3f4a;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background 0.16s ease;
+      }
+      .switch span::before {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        left: 3px;
+        top: 3px;
+        background: #fff;
+        border-radius: 50%;
+        transition: transform 0.16s ease;
+      }
+      .switch input:checked + span {
+        background: #f59e0b;
+      }
+      .switch input:checked + span::before {
+        transform: translateX(17px);
+      }
+      select {
+        width: 100%;
+        margin-top: 6px;
+        padding: 6px 8px;
+        border-radius: 7px;
+        background: #15171c;
+        color: #e8eaed;
+        border: 1px solid #343943;
+        font-size: 12px;
+      }
+      .stat {
+        margin-top: 10px;
+        padding: 9px 10px;
+        border-radius: 9px;
+        background: #1b2430;
+        border: 1px solid #26333f;
+        color: #a9c2d8;
+        font-size: 12px;
+      }
+      .stat b {
+        color: #f59e0b;
+        font-size: 14px;
+      }
+      footer {
+        margin-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #7f868f;
+        font-size: 11px;
+      }
+      a.link {
+        color: #f59e0b;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">D</div>
+      <h1>DoGet GitHub 下载加速</h1>
+    </header>
+    <p class="sub">GitHub 上的 Release 资源与源码包，点击下载时自动走 DoGet 加速。</p>
+
+    <div class="row">
+      <div>
+        <span class="label">自动加速下载链接</span>
+        <span class="hint">关闭后 GitHub 保持原始下载地址</span>
+      </div>
+      <label class="switch"><input type="checkbox" id="enabled" /><span></span></label>
+    </div>
+
+    <div class="row">
+      <div>
+        <span class="label">显示 ⚡ 标记</span>
+        <span class="hint">在已加速的链接后加一个小图标</span>
+      </div>
+      <label class="switch"><input type="checkbox" id="badge" /><span></span></label>
+    </div>
+
+    <div class="row">
+      <div style="width: 100%">
+        <span class="label">也加速 raw / 大文件直链</span>
+        <span class="hint">包含 raw.githubusercontent.com 等</span>
+      </div>
+      <label class="switch"><input type="checkbox" id="includeRaw" /><span></span></label>
+    </div>
+
+    <div class="row" style="display: block">
+      <span class="label">加速服务地址</span>
+      <select id="base">
+        <option value="https://doget.nocsdn.com">https://doget.nocsdn.com（默认）</option>
+        <option value="https://doget-api.oopscloud.xyz">https://doget-api.oopscloud.xyz</option>
+      </select>
+    </div>
+
+    <div class="stat" id="stat">正在读取当前页面状态…</div>
+
+    <footer>
+      <span>v1.0.0 · 本地运行，不收集数据</span>
+      <a class="link" href="https://doget.nocsdn.com" target="_blank" rel="noreferrer">打开 DoGet</a>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

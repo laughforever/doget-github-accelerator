@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "DoGet GitHub 下载加速",
+  "version": "1.0.0",
+  "description": "在 GitHub 点击 Release 资源、源码包等下载链接时，自动把链接转换成 DoGet 加速链接后再下载。",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://doget.nocsdn.com/*",
+    "https://doget-api.oopscloud.xyz/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "DoGet GitHub 下载加速",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.github.com/*"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+/* 已加速下载链接的轻量标记：只在链接文字后加一个小闪电，不改动页面布局结构 */
+a.doget-accelerated::after {
+  content: "⚡";
+  font-size: 0.72em;
+  margin-left: 0.28em;
+  opacity: 0.9;
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 1;
+}
+
+/* 关闭标记时完全隐藏，不影响原有链接外观 */
+html.doget-no-badge a.doget-accelerated::after {
+  content: none;
+  display: none;
+}
